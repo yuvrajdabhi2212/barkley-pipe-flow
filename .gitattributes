@@ -1,0 +1,6 @@
+# Store text files with LF in the repo (consistent across Windows/Linux/CI),
+# check out native line endings locally.
+* text=auto eol=lf
+
+# Binary assets must not be line-ending converted.
+*.png binary

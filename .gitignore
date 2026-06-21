@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Note: figures/ are committed (they render in the README and are the
+# validation deliverables); regenerate them with scripts/make_figures.py.
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

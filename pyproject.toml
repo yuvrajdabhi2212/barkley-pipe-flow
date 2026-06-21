@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "barkley-pipe-flow"
+version = "0.1.0"
+description = "Reproduction of Barkley's (2011) reduced-order model of transitional pipe flow."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Yuvraj Dabhi", email = "yuvrajdabhi2212@gmail.com" }]
+keywords = [
+    "pipe-flow",
+    "transition-to-turbulence",
+    "reduced-order-model",
+    "method-of-lines",
+    "excitable-media",
+    "computational-fluid-dynamics",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.9",
+    "matplotlib>=3.6",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=7.0"]
+
+[project.urls]
+"Reference paper" = "https://doi.org/10.1103/PhysRevE.84.016309"
+"arXiv" = "https://arxiv.org/abs/1101.4125"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

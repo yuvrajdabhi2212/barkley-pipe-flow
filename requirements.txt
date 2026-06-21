@@ -1,0 +1,10 @@
+# Runtime + test dependencies for the Barkley pipe-flow reproduction.
+#
+# Lower bounds (not exact pins) are used deliberately so the project stays
+# compatible with the versions preinstalled on Google Colab, where forcing an
+# exact downgrade/upgrade of numpy/scipy often breaks the session. These bounds
+# are the minimum versions the code is tested against; newer is fine.
+numpy>=1.23
+scipy>=1.9
+matplotlib>=3.6
+pytest>=7.0
