@@ -239,16 +239,18 @@ def step(
     Parameters
     ----------
     q, u : numpy.ndarray
-        Current lattice fields, shape ``(n,)`` (periodic).
+        Current lattice fields. The lattice is the **last** axis, so a 1-D
+        ``(n,)`` state or a stacked ensemble ``(m, n)`` of ``m`` independent
+        realizations are both accepted (rolls use ``axis=-1``).
     params : DiscreteParams
         Model parameters.
 
     Returns
     -------
     tuple of numpy.ndarray
-        Updated ``(q, u)`` fields.
+        Updated ``(q, u)`` fields, same shape as the inputs.
     """
-    laplacian = np.roll(q, 1) - 2.0 * q + np.roll(q, -1)
+    laplacian = np.roll(q, 1, axis=-1) - 2.0 * q + np.roll(q, -1, axis=-1)
     q_arg = q + params.d * laplacian
     alpha = threshold_alpha(u, params.R)
     q_new = tent_map_iterated(q_arg, alpha, params.k, params.beta, params.gamma)
@@ -256,7 +258,7 @@ def step(
         u
         + params.eps1 * (1.0 - u)
         - params.eps2 * u * q
-        - params.c * (u - np.roll(u, 1))
+        - params.c * (u - np.roll(u, 1, axis=-1))
     )
     return q_new, u_new
 

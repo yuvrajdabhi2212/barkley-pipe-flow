@@ -17,12 +17,12 @@ results — the equilibrium-puff / expanding-slug regimes, the nullcline phase
 plane, and space–time diagrams — using only NumPy, SciPy and Matplotlib so it
 runs on a free Google Colab CPU instance.
 
-> **Status.** **Phase 1 (continuous two-PDE model) is complete and validated**
-> against Barkley's Figs. 1–2 (see [§3](#3-validation-against-the-paper)); the
-> test suite (86 tests) runs in CI. **Phase 2 is underway:** the discrete
-> coupled-map-lattice model is implemented and reproduces Barkley Fig. 4
-> (decay / splitting / slug); the survival statistics are the remaining
-> milestones (see [`ROADMAP.md`](ROADMAP.md)).
+> **Status.** **Both phases are implemented and validated.** Phase 1 (continuous
+> two-PDE model) reproduces Barkley Figs. 1–2 and the `r_c = 0.833` transition;
+> Phase 2 (discrete coupled-map-lattice model + survival statistics) reproduces
+> Figs. 4, 5a and 12, including the **decay/splitting lifetime crossing at
+> `R_×≈2038`** (Barkley's 2040). The test suite (88 tests) runs in CI. See
+> [`ROADMAP.md`](ROADMAP.md) for precision caveats on the reduced ensembles.
 
 ---
 
@@ -114,7 +114,8 @@ Colab instance:
 |----------|------|
 | `01_continuous_regimes.ipynb` — Figs. 1–2 | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/yuvrajdabhi2212/barkley-pipe-flow/blob/main/notebooks/01_continuous_regimes.ipynb) |
 | `02_space_time_diagrams.ipynb` — x–t & `r_c` sweep | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/yuvrajdabhi2212/barkley-pipe-flow/blob/main/notebooks/02_space_time_diagrams.ipynb) |
-| `03_phase2_roadmap.ipynb` — discrete-model outline | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/yuvrajdabhi2212/barkley-pipe-flow/blob/main/notebooks/03_phase2_roadmap.ipynb) |
+| `03_phase2_roadmap.ipynb` — discrete model (Fig. 4) | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/yuvrajdabhi2212/barkley-pipe-flow/blob/main/notebooks/03_phase2_roadmap.ipynb) |
+| `04_survival_statistics.ipynb` — lifetimes, `τ(R)`, `F_t` | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/yuvrajdabhi2212/barkley-pipe-flow/blob/main/notebooks/04_survival_statistics.ipynb) |
 
 ---
 
@@ -179,10 +180,36 @@ piecewise-linear tent map with an escape window (`β > 0`). Its control paramete
 
 a **decaying puff** (`R = 1900`, below onset — turbulence persists chaotically
 then abruptly relaminarizes), **puff splitting / proliferation** (`R = 2200`),
-and an **expanding slug** (`R = 3000`). This reproduces Barkley Fig. 4. The
-survival statistics built on this model (lifetimes, `τ(R)`, turbulence fraction,
-and the directed-percolation onset) are the remaining Phase-2 milestones — see
-[`ROADMAP.md`](ROADMAP.md).
+and an **expanding slug** (`R = 3000`). This reproduces Barkley Fig. 4.
+
+### Phase 2 — survival statistics (Barkley Figs. 5a, 12)
+
+Ensembles of discrete-model runs ([`statistics.py`](src/barkley_pipe/statistics.py))
+turn pipe transition into a *phase transition*. (Reduced, Colab-sized ensembles,
+so the numbers below are reproduction targets within tolerance.)
+
+![Puff-decay survival curves](figures/fig6_survival.png)
+
+**Memoryless lifetimes (Fig. 12):** puff-decay survival is exponential,
+`P(n) ∼ exp(−n/τ(R))` — straight on a log axis — and `τ` grows steeply
+(super-exponentially) with `R`.
+
+![Decay/splitting lifetime crossing](figures/fig7_tau_crossing.png)
+
+**The crossing (Fig. 5a):** `τ_decay(R)` rises while `τ_split(R)` falls; they
+cross at **`R_×≈2038`**, reproducing Barkley's `R_×≈2040` and matching the
+experimental/DNS crossover `Re = 2040 ± 10` (Avila et al. 2011) — the single
+most important external validation number. Estimated by right-censored MLE since
+near-onset puffs outlive the run.
+
+![Turbulence fraction onset](figures/fig8_turbulence_fraction.png)
+
+**Onset (order parameter):** the turbulent fraction `F_t(R)` rises continuously
+from ≈0 near `R_c≈2046`. Resolving the *precise* directed-percolation exponent
+(`β_DP≈0.276`) needs critical-region sampling on large lattices; the reduced
+ensembles here give a larger effective exponent (≈0.7) far from `R_c` — the
+transition is reproduced, the exponent is not precision-matched (see
+[`ROADMAP.md`](ROADMAP.md)).
 
 ---
 

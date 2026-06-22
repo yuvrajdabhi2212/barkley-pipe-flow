@@ -67,11 +67,13 @@ and regime control by `R` are covered by `tests/test_discrete.py`.
 
 ---
 
-## Milestone 2 — Event detection + ensembles (`statistics.py`)
+## Milestone 2 — Event detection + ensembles (`statistics.py`) — ✅ DONE
 
-- [ ] `detect_decay` (turbulent energy below threshold) and `detect_splitting`
-      (two patches separated by a laminar gap `≳ 80` sites).
-- [ ] `measure_lifetimes` over Monte-Carlo ensembles of randomized initial puffs.
+- [x] `detect_decay` (no super-threshold site remains) and `detect_splitting`
+      (≥2 turbulent clusters separated by a laminar gap `≥ 80` sites — counts big
+      gaps, ignoring small internal dips within one chaotic puff).
+- [x] `measure_lifetimes` / `sample_lifetimes` over **vectorised** Monte-Carlo
+      ensembles (the whole ensemble is stepped at once via `step`'s `axis=-1`).
 
 **Compute note (Colab).** Barkley's published statistics use ~4000 realizations
 on grids up to `1.2×10⁵` sites for up to `8×10⁶` steps near criticality. That is
@@ -81,44 +83,51 @@ matching the published precision. Log any truncation explicitly.
 
 ---
 
-## Milestone 3 — Survival statistics (`statistics.py`)
+## Milestone 3 — Survival statistics (`statistics.py`) — ✅ DONE
 
-- [ ] `fit_tau`: MLE for the memoryless law `P(n) ~ exp(-n/τ(R))`. The exponential
-      MLE is the sample mean; use `scipy.stats.expon.fit(data, floc=0)`.
-- [ ] `survival_function` + log-linear plot — **reproduce Fig. 12** (decay
-      `R=1800–2000`, splitting `R=2060–2180`).
-- [ ] `tau_of_R` for decay and splitting; show the **lifetime crossing near
-      `R_× ≈ 2040`** (Fig. 5a inset). This must match the experimental/DNS
-      crossover `Re = 2040 ± 10` (Avila et al. 2011, *Science*) — the single
-      most important external validation number.
-
----
-
-## Milestone 4 — Turbulence fraction & directed percolation
-
-- [ ] `turbulence_fraction` order parameter `F_t(R)`.
-- [ ] Locate onset `R_c ≈ 2046.2`; test the scaling `F_t ~ (R - R_c)^{β_DP}`.
-      The canonical (1+1)D directed-percolation exponent is `β_DP = 0.276486(8)`
-      (Barkley's quoted `0.28` is this rounded). **A fitted exponent in the
-      `0.26–0.29` band counts as success** given finite-size effects.
+- [x] `fit_tau`: exponential MLE via `scipy.stats.expon.fit(data, floc=0)`.
+- [x] `survival_function` + log-linear plot — **Fig. 12 reproduced**
+      ([`figures/fig6_survival.png`](figures/fig6_survival.png)): memoryless
+      exponential survival, `τ` rising super-exponentially with `R`.
+- [x] `tau_of_R` (right-censored MLE) for decay and splitting; the **lifetime
+      crossing lands at `R_×≈2038`**
+      ([`figures/fig7_tau_crossing.png`](figures/fig7_tau_crossing.png)) —
+      reproducing Barkley's `R_×≈2040` and matching `Re = 2040 ± 10`
+      (Avila et al. 2011).
 
 ---
 
-## Milestone 5 — Original value-add
+## Milestone 4 — Turbulence fraction & directed percolation — ✅ DONE (with caveat)
 
-- [ ] A `τ(R)` parameter sweep (beyond the figures reproduced above).
-- [ ] A quantitative **continuous-vs-discrete comparison** (e.g. front/expansion
-      behaviour of the continuous model vs the discrete model's mean dynamics).
+- [x] `turbulence_fraction` order parameter `F_t(R)`
+      ([`figures/fig8_turbulence_fraction.png`](figures/fig8_turbulence_fraction.png)):
+      continuous onset of a non-zero `F_t` near `R_c≈2046`.
+- [~] DP exponent **not precision-matched.** Reduced, far-from-critical
+      ensembles give an effective exponent ≈0.7, not `β_DP=0.276486(8)`.
+      Resolving the universal exponent needs critical-region sampling on large
+      lattices (Barkley: ~4000 runs on ~10⁵ sites), beyond free Colab. The
+      *transition* is reproduced; the exponent is documented future work.
+
+---
+
+## Milestone 5 — Original value-add — ◑ PARTIAL
+
+- [x] A `τ(R)` parameter sweep for both decay and splitting (Fig. 5a above),
+      with a right-censored estimator robust to near-onset survivors.
+- [ ] A quantitative **continuous-vs-discrete comparison** — open (optional
+      extension: compare the continuous front-expansion onset at `r_c` with the
+      discrete `F_t`/lifetime onset at `R_c`).
 
 ---
 
 ## Acceptance criteria
 
-1. Fig. 4 space-time diagrams qualitatively match (decay / split / slug).
-2. Survival curves are straight on a log-linear plot (memoryless) and `τ(R)`
-   increases steeply (super-exponentially) with `R`.
-3. The decay/splitting `τ(R)` curves cross near `R_× ≈ 2040`.
-4. `F_t(R)` onset near `R_c ≈ 2046` with a DP-like exponent in `[0.26, 0.29]`.
+1. ✅ Fig. 4 space-time diagrams match (decay / split / slug).
+2. ✅ Survival curves ~straight on a log axis (memoryless); `τ(R)` rises
+   super-exponentially with `R`.
+3. ✅ Decay/splitting `τ(R)` curves cross at **`R_×≈2038`** (target ~2040).
+4. ◑ `F_t(R)` onset reproduced near `R_c≈2046`, **but** the DP exponent is not
+   precision-matched with reduced ensembles (effective ≈0.7; see Milestone 4).
 
 ---
 
