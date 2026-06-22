@@ -19,9 +19,10 @@ runs on a free Google Colab CPU instance.
 
 > **Status.** **Phase 1 (continuous two-PDE model) is complete and validated**
 > against Barkley's Figs. 1–2 (see [§3](#3-validation-against-the-paper)); the
-> test suite (80 tests) runs in CI. **Phase 2** (discrete coupled-map-lattice
-> model + survival statistics) is scaffolded as documented stubs with a full
-> plan in [`ROADMAP.md`](ROADMAP.md).
+> test suite (86 tests) runs in CI. **Phase 2 is underway:** the discrete
+> coupled-map-lattice model is implemented and reproduces Barkley Fig. 4
+> (decay / splitting / slug); the survival statistics are the remaining
+> milestones (see [`ROADMAP.md`](ROADMAP.md)).
 
 ---
 
@@ -166,6 +167,22 @@ switching on **exactly at `r_c = ε₂/(ε₁+ε₂) = 0.833`** and growing mono
 into the slug regime — a quantitative reproduction of the excitable→bistable
 transition. Front speeds use a wrap-robust, centroid-centred measurement
 ([`diagnostics.front_kinematics`](src/barkley_pipe/diagnostics.py)).
+
+### Phase 2 (in progress) — discrete model space-time (Barkley Fig. 4)
+
+The discrete coupled-map-lattice model ([`discrete.py`](src/barkley_pipe/discrete.py))
+adds the stochastic decay/splitting the continuous model lacks, via a
+piecewise-linear tent map with an escape window (`β > 0`). Its control parameter
+`R` selects the regime:
+
+![Discrete-model space-time diagrams](figures/fig5_discrete_spacetime.png)
+
+a **decaying puff** (`R = 1900`, below onset — turbulence persists chaotically
+then abruptly relaminarizes), **puff splitting / proliferation** (`R = 2200`),
+and an **expanding slug** (`R = 3000`). This reproduces Barkley Fig. 4. The
+survival statistics built on this model (lifetimes, `τ(R)`, turbulence fraction,
+and the directed-percolation onset) are the remaining Phase-2 milestones — see
+[`ROADMAP.md`](ROADMAP.md).
 
 ---
 

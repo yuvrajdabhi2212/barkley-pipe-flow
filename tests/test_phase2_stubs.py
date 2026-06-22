@@ -1,11 +1,11 @@
-"""Phase 2 boundary tests.
+"""Phase 2 boundary tests for the not-yet-implemented statistics module.
 
-Phase 2 (discrete coupled-map-lattice model and its survival statistics) is
-scaffolded as documented stubs. These tests assert that the modules import
-cleanly (so the package as a whole is importable and CI stays green) and that
-the public Phase 2 entry points raise ``NotImplementedError`` until they are
-implemented per ``ROADMAP.md``. Replace each ``pytest.raises`` with a real
-behavioural test as the corresponding function is implemented.
+The discrete model (:mod:`barkley_pipe.discrete`) is implemented and tested in
+``test_discrete.py``. The survival-statistics layer
+(:mod:`barkley_pipe.statistics`) is still scaffolded as documented stubs; this
+file asserts the module imports cleanly and its public entry points raise
+``NotImplementedError`` until implemented per ``ROADMAP.md``. Replace each
+``pytest.raises`` with a real behavioural test as the function is implemented.
 """
 
 from __future__ import annotations
@@ -13,34 +13,7 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from barkley_pipe import discrete, statistics
-
-
-def test_discrete_module_constants_present() -> None:
-    # Parameters are real scaffolding (not "logic") and should be defined.
-    assert discrete.BETA > 0  # enables spontaneous decay
-    assert discrete.D <= 0.5  # diffusion stability bound
-    assert discrete.K == 2
-    params = discrete.DiscreteParams(R=2200.0)
-    assert params.R == 2200.0
-    assert params.gamma == discrete.GAMMA
-
-
-@pytest.mark.parametrize(
-    "call",
-    [
-        lambda: discrete.threshold_alpha(np.ones(4), 2200.0),
-        lambda: discrete.tent_map(np.ones(4), np.ones(4)),
-        lambda: discrete.tent_map_iterated(np.ones(4), np.ones(4)),
-        lambda: discrete.initial_puff(64),
-        lambda: discrete.step(np.ones(4), np.ones(4), discrete.DiscreteParams(R=2200.0)),
-        lambda: discrete.simulate_discrete(np.ones(4), np.ones(4),
-                                           discrete.DiscreteParams(R=2200.0), 10),
-    ],
-)
-def test_discrete_stubs_raise(call) -> None:
-    with pytest.raises(NotImplementedError):
-        call()
+from barkley_pipe import statistics
 
 
 @pytest.mark.parametrize(

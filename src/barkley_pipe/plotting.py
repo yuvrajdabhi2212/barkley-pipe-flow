@@ -15,7 +15,7 @@ figures:
 
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Optional, Sequence
+from typing import TYPE_CHECKING, Optional
 
 import numpy as np
 from numpy.typing import NDArray
@@ -28,7 +28,8 @@ if TYPE_CHECKING:  # pragma: no cover - typing only
 
     from .continuous import ContinuousResult
 
-__all__ = ["plot_profile", "plot_phase_plane", "plot_spacetime", "recenter_snapshot"]
+__all__ = ["plot_profile", "plot_phase_plane", "plot_spacetime",
+           "plot_discrete_spacetime", "recenter_snapshot"]
 
 # Consistent colours for the two fields across all figures.
 _Q_COLOR = "#c1272d"  # turbulence intensity q
@@ -225,5 +226,60 @@ def plot_spacetime(
     ax.set_ylabel(r"$t$")
     frame = "" if comoving_speed is None else rf" (frame speed $={comoving_speed:g}$)"
     ax.set_title(rf"Space-time $q(x,t)$, $r={result.params.r:g}$" + frame)
+    plt.colorbar(im, ax=ax, label=r"$q$")
+    return ax
+
+
+def plot_discrete_spacetime(
+    q_spacetime: NDArray[np.float64],
+    *,
+    store_every: int = 1,
+    ax: Optional["Axes"] = None,
+    cmap: str = "inferno",
+    title: Optional[str] = None,
+) -> "Axes":
+    """Plot an ``i``-``n`` space-time diagram of the discrete-model ``q`` lattice.
+
+    Companion to :func:`plot_spacetime` for the discrete coupled-map lattice
+    (:func:`barkley_pipe.discrete.simulate_discrete`), which returns a raw
+    ``(n_stored, n_sites)`` array rather than a :class:`ContinuousResult`.
+    Reproduces the style of Barkley Fig. 4.
+
+    Parameters
+    ----------
+    q_spacetime : numpy.ndarray
+        Space-time array of ``q``, shape ``(n_stored, n_sites)`` (row 0 earliest).
+    store_every : int, optional
+        Steps between stored rows, used only to label the time axis. Default ``1``.
+    ax : matplotlib.axes.Axes, optional
+        Axis to draw on. A new figure/axis is created if omitted.
+    cmap : str, optional
+        Matplotlib colormap name. Default ``'inferno'``.
+    title : str, optional
+        Axis title.
+
+    Returns
+    -------
+    matplotlib.axes.Axes
+        The axis containing the image.
+    """
+    import matplotlib.pyplot as plt
+
+    if ax is None:
+        _, ax = plt.subplots(figsize=(5, 5))
+
+    arr = np.asarray(q_spacetime)
+    n_rows, n_sites = arr.shape
+    im = ax.imshow(
+        arr,
+        origin="lower",
+        aspect="auto",
+        cmap=cmap,
+        extent=(0.0, float(n_sites), 0.0, float(n_rows * store_every)),
+    )
+    ax.set_xlabel(r"lattice site $i$")
+    ax.set_ylabel(r"time step $n$")
+    if title is not None:
+        ax.set_title(title)
     plt.colorbar(im, ax=ax, label=r"$q$")
     return ax
