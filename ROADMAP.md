@@ -7,9 +7,13 @@ continuous model — supports stochastic puff **decay** and **splitting** and
 hence the memoryless lifetime statistics and the directed-percolation onset of
 sustained turbulence.
 
-The module skeletons exist as documented stubs raising `NotImplementedError`:
-[`discrete.py`](src/barkley_pipe/discrete.py) and
-[`statistics.py`](src/barkley_pipe/statistics.py).
+> **✅ Phase 2 is now implemented** in [`discrete.py`](src/barkley_pipe/discrete.py)
+> and [`statistics.py`](src/barkley_pipe/statistics.py) (all five milestones below;
+> 88 tests pass). The key result — the decay/splitting lifetime crossing at
+> **`R_×≈2038`** — reproduces Barkley's `R_×≈2040`. The one item left as
+> documented future work is precision-matching the directed-percolation exponent
+> (Milestone 4), which needs large-lattice critical-region sampling beyond free
+> Colab. The milestones are kept below as the validation record.
 
 ---
 
@@ -110,13 +114,16 @@ matching the published precision. Log any truncation explicitly.
 
 ---
 
-## Milestone 5 — Original value-add — ◑ PARTIAL
+## Milestone 5 — Original value-add — ✅ DONE
 
 - [x] A `τ(R)` parameter sweep for both decay and splitting (Fig. 5a above),
       with a right-censored estimator robust to near-onset survivors.
-- [ ] A quantitative **continuous-vs-discrete comparison** — open (optional
-      extension: compare the continuous front-expansion onset at `r_c` with the
-      discrete `F_t`/lifetime onset at `R_c`).
+- [x] A quantitative **continuous-vs-discrete comparison**
+      ([`figures/fig9_continuous_vs_discrete.png`](figures/fig9_continuous_vs_discrete.png),
+      `scripts/make_comparison_figure.py`): the continuous front-expansion rate
+      switches on at `r_c=0.833` and the discrete turbulent-spreading rate
+      switches on at `R_c≈2046` — the same localized→spreading transition in both
+      reduced models.
 
 ---
 

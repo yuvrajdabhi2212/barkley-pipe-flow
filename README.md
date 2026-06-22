@@ -211,6 +211,18 @@ ensembles here give a larger effective exponent (≈0.7) far from `R_c` — the
 transition is reproduced, the exponent is not precision-matched (see
 [`ROADMAP.md`](ROADMAP.md)).
 
+### Synthesis — continuous vs discrete: one transition, two models
+
+![Continuous vs discrete comparison](figures/fig9_continuous_vs_discrete.png)
+
+Tying the two halves together: both reduced models describe the *same*
+laminar→turbulent transition. The continuous model's front-expansion rate turns
+on at the excitable→bistable point `r_c = 0.833`; the discrete model's
+turbulent-region spreading rate turns on at the sustained-turbulence onset
+`R_c ≈ 2046`. The continuous transition is a sharp deterministic bifurcation, the
+discrete one a smoother stochastic onset — but structurally they are the same
+switch from localized to spreading turbulence, in two parameterizations.
+
 ---
 
 ## 4. Scope and caveats
