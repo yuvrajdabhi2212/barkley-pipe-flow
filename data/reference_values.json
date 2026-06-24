@@ -1,0 +1,195 @@
+{
+  "_meta": {
+    "description": "Citation-tagged reference values for validating the Barkley (2011) pipe-flow reproduction. Analytic values are derived from the model; external values carry verified citations.",
+    "provenance_vocabulary": [
+      "analytic",
+      "canonical",
+      "dns",
+      "experimental",
+      "internal_target"
+    ],
+    "verification_vocabulary": [
+      "citation_verified",
+      "derived",
+      "primary_verified",
+      "secondary_corroborated",
+      "unverified"
+    ],
+    "generated_by": "barkley_pipe.reference_data.export_json"
+  },
+  "values": {
+    "r_c": {
+      "key": "r_c",
+      "description": "Critical Reynolds-number proxy separating excitable (equilibrium puff) from bistable (expanding slug) regimes.",
+      "value": 0.8333333333333333,
+      "units": "dimensionless",
+      "provenance": "analytic",
+      "verification": "derived",
+      "tolerance": 1e-12,
+      "uncertainty": "",
+      "verification_note": "r_c = eps2/(eps1+eps2) = 0.2/0.24 = 5/6, recomputed via nullclines.critical_r(); exact rational value.",
+      "citation": {
+        "authors": "Barkley, D.",
+        "year": 2011,
+        "title": "Simplifying the complexity of pipe flow",
+        "venue": "Phys. Rev. E 84, 016309",
+        "doi": "10.1103/PhysRevE.84.016309",
+        "url": "https://arxiv.org/abs/1101.4125",
+        "note": "Primary source: defines the reduced model reproduced here."
+      },
+      "anchor_key": null
+    },
+    "turbulent_node_q_r1": {
+      "key": "turbulent_node_q_r1",
+      "description": "q-coordinate of the bistable turbulent fixed point at r = 1.0.",
+      "value": 1.3432428636312652,
+      "units": "dimensionless",
+      "provenance": "analytic",
+      "verification": "derived",
+      "tolerance": 0.0001,
+      "uncertainty": "",
+      "verification_note": "Largest-q real root of the nullcline cubic via nullclines.fixed_points(1.0); ~1.343, README quotes 1.34.",
+      "citation": {
+        "authors": "Barkley, D.",
+        "year": 2011,
+        "title": "Simplifying the complexity of pipe flow",
+        "venue": "Phys. Rev. E 84, 016309",
+        "doi": "10.1103/PhysRevE.84.016309",
+        "url": "https://arxiv.org/abs/1101.4125",
+        "note": "Primary source: defines the reduced model reproduced here."
+      },
+      "anchor_key": null
+    },
+    "turbulent_node_u_r1": {
+      "key": "turbulent_node_u_r1",
+      "description": "u-coordinate of the bistable turbulent fixed point at r = 1.0.",
+      "value": 0.12959722977717072,
+      "units": "dimensionless",
+      "provenance": "analytic",
+      "verification": "derived",
+      "tolerance": 0.0001,
+      "uncertainty": "",
+      "verification_note": "u = eps1/(eps1+eps2 q) at the turbulent root; ~0.130, README quotes 0.13.",
+      "citation": {
+        "authors": "Barkley, D.",
+        "year": 2011,
+        "title": "Simplifying the complexity of pipe flow",
+        "venue": "Phys. Rev. E 84, 016309",
+        "doi": "10.1103/PhysRevE.84.016309",
+        "url": "https://arxiv.org/abs/1101.4125",
+        "note": "Primary source: defines the reduced model reproduced here."
+      },
+      "anchor_key": null
+    },
+    "laminar_eig_1": {
+      "key": "laminar_eig_1",
+      "description": "First Jacobian eigenvalue at the laminar point (0, 1).",
+      "value": -0.1,
+      "units": "1/time",
+      "provenance": "analytic",
+      "verification": "derived",
+      "tolerance": 1e-12,
+      "uncertainty": "",
+      "verification_note": "Eigenvalue -delta = -0.1; laminar point stable for all r.",
+      "citation": {
+        "authors": "Barkley, D.",
+        "year": 2011,
+        "title": "Simplifying the complexity of pipe flow",
+        "venue": "Phys. Rev. E 84, 016309",
+        "doi": "10.1103/PhysRevE.84.016309",
+        "url": "https://arxiv.org/abs/1101.4125",
+        "note": "Primary source: defines the reduced model reproduced here."
+      },
+      "anchor_key": null
+    },
+    "laminar_eig_2": {
+      "key": "laminar_eig_2",
+      "description": "Second Jacobian eigenvalue at the laminar point (0, 1).",
+      "value": -0.04,
+      "units": "1/time",
+      "provenance": "analytic",
+      "verification": "derived",
+      "tolerance": 1e-12,
+      "uncertainty": "",
+      "verification_note": "Eigenvalue -eps1 = -0.04.",
+      "citation": {
+        "authors": "Barkley, D.",
+        "year": 2011,
+        "title": "Simplifying the complexity of pipe flow",
+        "venue": "Phys. Rev. E 84, 016309",
+        "doi": "10.1103/PhysRevE.84.016309",
+        "url": "https://arxiv.org/abs/1101.4125",
+        "note": "Primary source: defines the reduced model reproduced here."
+      },
+      "anchor_key": null
+    },
+    "Re_crossover_avila2011": {
+      "key": "Re_crossover_avila2011",
+      "description": "Experimental/DNS Reynolds number at which the puff decay and splitting timescales cross -- the onset of sustained turbulence in pipe flow.",
+      "value": 2040.0,
+      "units": "Reynolds number",
+      "provenance": "experimental",
+      "verification": "citation_verified",
+      "tolerance": 10.0,
+      "uncertainty": "+/- 10",
+      "verification_note": "Citation (Science 333:192-196, DOI 10.1126/science.1203223, PMID 21737736) confirmed against PubMed and ISTA; abstract confirms a 'distinct critical point'. The numeric 2040 +/- 10 is in the paywalled body/figures, so this is citation_verified, not primary_verified; corroborated by Avila, Barkley & Hof (2023) review.",
+      "citation": {
+        "authors": "Avila, K., Moxey, D., de Lozar, A., Avila, M., Barkley, D., Hof, B.",
+        "year": 2011,
+        "title": "The onset of turbulence in pipe flow",
+        "venue": "Science 333(6039), 192-196",
+        "doi": "10.1126/science.1203223",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21737736/",
+        "note": "Establishes the decay/splitting crossover Re = 2040 +/- 10."
+      },
+      "anchor_key": null
+    },
+    "beta_DP": {
+      "key": "beta_DP",
+      "description": "Order-parameter critical exponent of the (1+1)D directed-percolation universality class (the class of the sustained-turbulence onset).",
+      "value": 0.276486,
+      "units": "dimensionless",
+      "provenance": "canonical",
+      "verification": "secondary_corroborated",
+      "tolerance": 8e-06,
+      "uncertainty": "(8) on the last digit -> 0.276486(8)",
+      "verification_note": "beta_DP = 0.276486(8); confirmed against the DP literature (Jensen 1999; arXiv:cond-mat/0205490). Barkley's quoted 0.28 is this value rounded.",
+      "citation": {
+        "authors": "Jensen, I.",
+        "year": 1999,
+        "title": "Low-density series expansions for directed percolation I: a new efficient algorithm with applications to the square lattice",
+        "venue": "J. Phys. A: Math. Gen. 32, 5233",
+        "doi": "10.1088/0305-4470/32/28/304",
+        "url": "https://arxiv.org/abs/cond-mat/0205490",
+        "note": "High-precision (1+1)D directed-percolation exponents; beta = 0.276486(8)."
+      },
+      "anchor_key": null
+    },
+    "R_x_reproduced": {
+      "key": "R_x_reproduced",
+      "description": "This project's measured decay/splitting lifetime crossing from the discrete model (reduced, Colab-sized ensembles).",
+      "value": 2038.0,
+      "units": "Reynolds-number proxy R",
+      "provenance": "internal_target",
+      "verification": "derived",
+      "tolerance": 10.0,
+      "uncertainty": "",
+      "verification_note": "Reproduction output, NOT a reference. Validated by comparison against Re_crossover_avila2011 (2040 +/- 10): 2038 is inside the band.",
+      "citation": null,
+      "anchor_key": "Re_crossover_avila2011"
+    },
+    "R_c_onset_reproduced": {
+      "key": "R_c_onset_reproduced",
+      "description": "This project's measured sustained-turbulence onset (turbulent fraction departs from zero) in the discrete model.",
+      "value": 2046.2,
+      "units": "Reynolds-number proxy R",
+      "provenance": "internal_target",
+      "verification": "derived",
+      "tolerance": 15.0,
+      "uncertainty": "",
+      "verification_note": "Reproduction output, NOT a reference. NOTE: the onset R_c is a DIFFERENT quantity from the crossover R_x; do not force it into the 2040 +/- 10 band. Compare like with like.",
+      "citation": null,
+      "anchor_key": null
+    }
+  }
+}

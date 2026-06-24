@@ -21,8 +21,11 @@ runs on a free Google Colab CPU instance.
 > two-PDE model) reproduces Barkley Figs. 1–2 and the `r_c = 0.833` transition;
 > Phase 2 (discrete coupled-map-lattice model + survival statistics) reproduces
 > Figs. 4, 5a and 12, including the **decay/splitting lifetime crossing at
-> `R_×≈2038`** (Barkley's 2040). The test suite (88 tests) runs in CI. See
-> [`ROADMAP.md`](ROADMAP.md) for precision caveats on the reduced ensembles.
+> `R_×≈2038`** (Barkley's 2040). The test suite (103 tests) runs in CI — including
+> method-of-manufactured-solutions **code verification** and a citation-tagged
+> **reference registry** that fails the build on any unsourced number (see
+> [`VALIDATION.md`](VALIDATION.md)). See [`ROADMAP.md`](ROADMAP.md) for precision
+> caveats on the reduced ensembles.
 
 ---
 
