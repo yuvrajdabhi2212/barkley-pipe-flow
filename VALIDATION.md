@@ -181,6 +181,19 @@ overlay your curve on the *digitized source curve with its citation in the
 caption*, and quantify agreement (RMS error over the overlap, slope on the
 expected scaling axis) rather than asserting the shapes "look the same".
 
+This is now **executable**, mirroring the scalar registry one shape up:
+[`reference_curves.py`](src/barkley_pipe/reference_curves.py) loads a digitized
+reference curve — *refusing it* unless it carries a citation and still matches its
+recorded checksum — and `compare_curve` reports the max/RMS relative error over
+the overlap. The headline comparison (your reproduced `τ(R)` crossing vs Barkley
+Fig. 5a) is wired up in
+[`scripts/validate_against_figure.py`](scripts/validate_against_figure.py), and
+the one-time digitization procedure is in
+[`data/reference_curves/README.md`](data/reference_curves/README.md). **No curve
+data is shipped pre-filled** — a digitized curve must be read off the real figure
+by you, not produced from memory; until then the loader raises a "digitize it
+first" error rather than letting an empty comparison pass.
+
 ---
 
 ## 6. Detecting and avoiding AI hallucination (a checklist)

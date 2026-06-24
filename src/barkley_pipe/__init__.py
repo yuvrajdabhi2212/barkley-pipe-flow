@@ -27,6 +27,7 @@ from . import (
     nullclines,
     operators,
     plotting,
+    reference_curves,
     reference_data,
     statistics,
 )
@@ -62,6 +63,7 @@ __all__ = [
     "discrete",
     "statistics",
     "reference_data",
+    "reference_curves",
     # re-exported convenience API
     "EPS1",
     "EPS2",

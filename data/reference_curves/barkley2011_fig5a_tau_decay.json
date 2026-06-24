@@ -1,0 +1,22 @@
+{
+  "description": "TEMPLATE — decay-time tau_decay vs R, to be digitized from Barkley (2011) Fig. 5a (decay branch). No data file is shipped; provide barkley2011_fig5a_tau_decay.csv yourself.",
+  "x_label": "R (discrete Reynolds-number proxy)",
+  "y_label": "tau_decay",
+  "units": "x: dimensionless R; y: advective time units (log axis in the figure)",
+  "provenance": "dns",
+  "verification": "unverified",
+  "rel_tolerance": 0.25,
+  "uncertainty": "digitization error (reading a log axis by eye) plus this project's reduced-ensemble error",
+  "source": {
+    "authors": "Barkley, D.",
+    "year": 2011,
+    "title": "Simplifying the complexity of pipe flow",
+    "venue": "Phys. Rev. E 84, 016309",
+    "doi": "10.1103/PhysRevE.84.016309",
+    "url": "https://arxiv.org/abs/1101.4125",
+    "obtained_by": "TEMPLATE — replace with: 'digitized Fig. 5a decay branch with WebPlotDigitizer, N points'",
+    "accessed": "YYYY-MM-DD"
+  },
+  "verification_note": "Set verification to primary_verified only after you read the curve off the paper's own Fig. 5a.",
+  "sha256": ""
+}
